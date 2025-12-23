@@ -7,6 +7,7 @@ use App\Http\Controllers\PostWbbmController;
 use App\Http\Controllers\GetWbbmController;
 use App\Models\Categories;
 use App\Http\Controllers\GuestBookController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,3 +70,12 @@ Route::put('/guest_book/{id}', [GuestBookController::class, 'update'])->name('gu
 Route::delete('/guest_book/{id}', [GuestBookController::class, 'destroy'])->name('guest_book_destroy');
 Route::get('/guest-book/print/pdf', [GuestBookController::class, 'printPdf'])
     ->name('guest_book_print_pdf');
+
+//data admin
+// ===== EMPLOYEE ROUTES =====
+Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
+Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
+Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
+Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
+Route::put('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
+Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
