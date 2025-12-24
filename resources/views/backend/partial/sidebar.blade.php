@@ -16,18 +16,25 @@
             Features
         </div>
         <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#data" aria-expanded="true"
+                aria-controls="collapseTable">
+                <i class="fab fa-fw fa-wpforms"></i>
+                <span>Data</span>
+            </a>
+            <div id="data" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Daftar Data</h6>
+                    <a class="collapse-item" href="{{ route('employees.index') }}">Data Pegawai</a>
+                    <a class="collapse-item" href="#">Akun google Terdaftar</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGuest"
                 aria-expanded="true" aria-controls="collapseTable">
                 <i class="fab fa-fw fa-wpforms"></i>
                 <span>Buku Tamu</span>
             </a>
-            {{-- <div id="collapseGuest" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Buku Tamu</h6>
-                    <a class="collapse-item" href="{{ route('guest_book_create') }}">Form Buku Tamu</a>
-                    <a class="collapse-item" href="{{ route('guest_book_index') }}">Daftar Tamu</a>
-                </div>
-            </div> --}}
         </li>
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseemail"
