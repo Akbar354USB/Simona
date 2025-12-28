@@ -44,8 +44,9 @@
             </a>
             <div id="collapseemail" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Buku Tamu</h6>
-                    <a class="collapse-item" href="{{ route('google-accounts.index') }}">Penerima Reminder</a>
+                    <h6 class="collapse-header">Reminder</h6>
+                    <a class="collapse-item" href="{{ route('work-schedules.index') }}">Jadwal Reminder</a>
+                    <a class="collapse-item" href="{{ route('google-accounts.index') }}">Akun google terdaftar</a>
                 </div>
             </div>
         </li>

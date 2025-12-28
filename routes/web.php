@@ -9,6 +9,8 @@ use App\Models\Categories;
 use App\Http\Controllers\GuestBookController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\GoogleAccountController;
+use App\Http\Controllers\WorkScheduleController;
+
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -85,6 +87,14 @@ Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->
 //data google Account
 Route::get('/google-accounts', [GoogleAccountController::class, 'index'])->name('google-accounts.index');
 Route::delete('/google-accounts/{googleAccount}', [GoogleAccountController::class, 'destroy'])->name('google-accounts.destroy');
+
+//data work schedule
+Route::get('/work-schedules', [WorkScheduleController::class, 'index'])->name('work-schedules.index');
+Route::get('/work-schedules/create', [WorkScheduleController::class, 'create'])->name('work-schedules.create');
+Route::post('/work-schedules', [WorkScheduleController::class, 'store'])->name('work-schedules.store');
+Route::get('/work-schedules/{workSchedule}/edit', [WorkScheduleController::class, 'edit'])->name('work-schedules.edit');
+Route::put('/work-schedules/{workSchedule}', [WorkScheduleController::class, 'update'])->name('work-schedules.update');
+Route::delete('/work-schedules/{workSchedule}', [WorkScheduleController::class, 'destroy'])->name('work-schedules.destroy');
 
 Auth::routes();
 
