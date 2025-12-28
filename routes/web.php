@@ -9,6 +9,7 @@ use App\Models\Categories;
 use App\Http\Controllers\GuestBookController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\GoogleAccountController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,3 +85,7 @@ Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->
 //data google Account
 Route::get('/google-accounts', [GoogleAccountController::class, 'index'])->name('google-accounts.index');
 Route::delete('/google-accounts/{googleAccount}', [GoogleAccountController::class, 'destroy'])->name('google-accounts.destroy');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
