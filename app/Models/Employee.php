@@ -36,4 +36,12 @@ class Employee extends Model
     {
         return $this->belongsToMany(GuestBook::class, 'employee_guest_books');
     }
+
+    /**
+     * Relasi ke user
+     */
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

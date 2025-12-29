@@ -18,8 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'employee_id',
         'password',
     ];
 
@@ -41,4 +40,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Relasi ke pegawai
+     */
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->employee->employee_name ?? '-';
+    }
 }

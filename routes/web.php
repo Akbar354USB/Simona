@@ -10,6 +10,7 @@ use App\Http\Controllers\GuestBookController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\GoogleAccountController;
 use App\Http\Controllers\WorkScheduleController;
+use App\Http\Controllers\ReminderLogController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -95,6 +96,12 @@ Route::post('/work-schedules', [WorkScheduleController::class, 'store'])->name('
 Route::get('/work-schedules/{workSchedule}/edit', [WorkScheduleController::class, 'edit'])->name('work-schedules.edit');
 Route::put('/work-schedules/{workSchedule}', [WorkScheduleController::class, 'update'])->name('work-schedules.update');
 Route::delete('/work-schedules/{workSchedule}', [WorkScheduleController::class, 'destroy'])->name('work-schedules.destroy');
+
+Route::delete('/reminder-logs/truncate', [ReminderLogController::class, 'truncate'])->name('reminder-logs.truncate');
+Route::get('/reminder-logs', [ReminderLogController::class, 'index'])->name('reminder-logs.index');
+Route::delete('/reminder-logs/{reminderLog}', [ReminderLogController::class, 'destroy'])->name('reminder-logs.destroy');
+
+
 
 Auth::routes();
 

@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 use App\Models\Employee;
 use App\Services\GoogleCalendarService;
 use Carbon\Carbon;
+use App\Models\ReminderLog;
 use Illuminate\Support\Facades\Log;
 
 class SendAttendanceReminder implements ShouldQueue
@@ -25,24 +26,81 @@ class SendAttendanceReminder implements ShouldQueue
     }
 
 
+    // public function handle(GoogleCalendarService $calendar)
+    // {
+    //     $employees = Employee::with(['workSchedule', 'googleAccount'])
+    //         ->where('is_active', true)
+    //         ->get();
+
+    //     foreach ($employees as $employee) {
+
+    //         // Lewati jika tidak memiliki akun Google atau jadwal kerja
+    //         if (!$employee->googleAccount || !$employee->workSchedule) {
+    //             continue;
+    //         }
+
+    //         $today = Carbon::today('Asia/Makassar');
+
+    //         // =======================
+    //         // EVENT ABSEN MASUK
+    //         // =======================
+    //         $startIn = (clone $today)
+    //             ->setTimeFromTimeString($employee->workSchedule->time_in);
+
+    //         $endIn = (clone $startIn)->addMinutes(10);
+
+    //         try {
+    //             $calendar->createReminder(
+    //                 $employee->googleAccount,
+    //                 'Reminder Absensi Datang',
+    //                 $startIn,
+    //                 $endIn
+    //             );
+    //         } catch (\Exception $e) {
+    //             // Sengaja dikosongkan
+    //         }
+
+    //         // =======================
+    //         // EVENT ABSEN PULANG
+    //         // =======================
+    //         $startOut = (clone $today)
+    //             ->setTimeFromTimeString($employee->workSchedule->time_out);
+
+    //         $endOut = (clone $startOut)->addMinutes(10);
+
+    //         try {
+    //             $calendar->createReminder(
+    //                 $employee->googleAccount,
+    //                 'Reminder Absensi Pulang',
+    //                 $startOut,
+    //                 $endOut
+    //             );
+    //         } catch (\Exception $e) {
+    //             // Sengaja dikosongkan
+    //         }
+    //     }
+    // }
+
     public function handle(GoogleCalendarService $calendar)
     {
         $employees = Employee::with(['workSchedule', 'googleAccount'])
             ->where('is_active', true)
             ->get();
 
+        $today = Carbon::today('Asia/Makassar');
+
         foreach ($employees as $employee) {
 
-            // Lewati jika tidak memiliki akun Google atau jadwal kerja
+            // ============================
+            // VALIDASI DATA PEGAWAI
+            // ============================
             if (!$employee->googleAccount || !$employee->workSchedule) {
                 continue;
             }
 
-            $today = Carbon::today('Asia/Makassar');
-
-            // =======================
-            // EVENT ABSEN MASUK
-            // =======================
+            // ============================
+            // EVENT ABSEN MASUK (IN)
+            // ============================
             $startIn = (clone $today)
                 ->setTimeFromTimeString($employee->workSchedule->time_in);
 
@@ -55,13 +113,28 @@ class SendAttendanceReminder implements ShouldQueue
                     $startIn,
                     $endIn
                 );
+
+                ReminderLog::create([
+                    'employee_id' => $employee->id,
+                    'event_type'  => 'IN',
+                    'event_date'  => $today->toDateString(),
+                    'status'      => 'success',
+                    'message'     => 'Event absensi masuk berhasil dibuat',
+                ]);
             } catch (\Exception $e) {
-                // Sengaja dikosongkan
+
+                ReminderLog::create([
+                    'employee_id' => $employee->id,
+                    'event_type'  => 'IN',
+                    'event_date'  => $today->toDateString(),
+                    'status'      => 'failed',
+                    'message'     => $e->getMessage(),
+                ]);
             }
 
-            // =======================
-            // EVENT ABSEN PULANG
-            // =======================
+            // ============================
+            // EVENT ABSEN PULANG (OUT)
+            // ============================
             $startOut = (clone $today)
                 ->setTimeFromTimeString($employee->workSchedule->time_out);
 
@@ -74,8 +147,23 @@ class SendAttendanceReminder implements ShouldQueue
                     $startOut,
                     $endOut
                 );
+
+                ReminderLog::create([
+                    'employee_id' => $employee->id,
+                    'event_type'  => 'OUT',
+                    'event_date'  => $today->toDateString(),
+                    'status'      => 'success',
+                    'message'     => 'Event absensi pulang berhasil dibuat',
+                ]);
             } catch (\Exception $e) {
-                // Sengaja dikosongkan
+
+                ReminderLog::create([
+                    'employee_id' => $employee->id,
+                    'event_type'  => 'OUT',
+                    'event_date'  => $today->toDateString(),
+                    'status'      => 'failed',
+                    'message'     => $e->getMessage(),
+                ]);
             }
         }
     }

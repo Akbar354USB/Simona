@@ -47,6 +47,7 @@
                     <h6 class="collapse-header">Reminder</h6>
                     <a class="collapse-item" href="{{ route('work-schedules.index') }}">Jadwal Reminder</a>
                     <a class="collapse-item" href="{{ route('google-accounts.index') }}">Akun google terdaftar</a>
+                    <a class="collapse-item" href="{{ route('reminder-logs.index') }}">Monitoring Reminder</a>
                 </div>
             </div>
         </li>
