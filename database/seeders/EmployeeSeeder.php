@@ -15,7 +15,7 @@ class EmployeeSeeder extends Seeder
     {
         Employee::create([
             'employee_name' => 'Muhammad Akbar',
-            'email'         => 'jors@gmail.com',
+            'email'         => 'akbarmajenesmk5@gmail.com',
             'status'        => 'PNS',
             'is_active'     => true,
         ]);

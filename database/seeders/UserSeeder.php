@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Ambil 1 pegawai (pastikan sudah ada)
-        $employee = Employee::where('email', 'jors@gmail.com')->first();
+        $employee = Employee::where('email', 'akbarmajenesmk5@gmail.com')->first();
 
         // Jika pegawai belum ada, hentikan seeder
         if (!$employee) {

@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->job(new SendAttendanceReminder)
-            ->dailyAt('09:06');
+            ->dailyAt('09:55');
     }
 
     /**
