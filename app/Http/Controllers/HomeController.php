@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Employee;
+use App\Models\GuestBook;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $totalPegawai = Employee::count();
+        $totalTamu = GuestBook::count();
+        return view('dashboard',  compact('totalPegawai', 'totalTamu'));
     }
 }
