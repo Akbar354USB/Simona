@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\GuestBook;
@@ -27,6 +28,7 @@ class HomeController extends Controller
     {
         $totalPegawai = Employee::count();
         $totalTamu = GuestBook::count();
-        return view('dashboard',  compact('totalPegawai', 'totalTamu'));
+        $overallProgress = Categories::overallProgress();
+        return view('dashboard',  compact('totalPegawai', 'totalTamu', 'overallProgress'));
     }
 }

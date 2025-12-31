@@ -38,4 +38,33 @@ class Categories extends Model
 
         return $totalDocs > 0 ? round(($uploaded / $totalDocs) * 100) : 0;
     }
+
+    public static function overallProgress()
+    {
+        $totalDocs = 0;
+        $uploaded = 0;
+
+        $categories = self::with([
+            'sub_categories.items.item_documents.upload'
+        ])->get();
+
+        foreach ($categories as $category) {
+            foreach ($category->sub_categories as $sub) {
+                foreach ($sub->items as $item) {
+
+                    $totalDocs += $item->item_documents->count();
+
+                    foreach ($item->item_documents as $doc) {
+                        if ($doc->upload()->exists()) {
+                            $uploaded++;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $totalDocs > 0
+            ? round(($uploaded / $totalDocs) * 100)
+            : 0;
+    }
 }

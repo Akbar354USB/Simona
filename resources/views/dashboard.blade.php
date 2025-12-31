@@ -51,15 +51,16 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1">New User</div>
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">366</div>
+                                <div class="text-xs font-weight-bold text-uppercase mb-1">Progress Capaian WBK-WBBM</div>
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $overallProgress }} %</div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
-                                    <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 20.4%</span>
-                                    <span>Since last month</span>
+                                    <a href="{{ route('wbbm-tes-progres') }}"><span class="text-success mr-2"><i
+                                                class="fas fa-arrow-up"></i> Lihat
+                                            Data</span></a>
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-users fa-2x text-info"></i>
+                                <i class="fas fa-chart-line fa-2x text-info"></i>
                             </div>
                         </div>
                     </div>
