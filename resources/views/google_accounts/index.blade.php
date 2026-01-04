@@ -18,7 +18,6 @@
                                 <th>No</th>
                                 <th>Pegawai</th>
                                 <th>Email Google</th>
-                                <th>Expired Token</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -26,11 +25,8 @@
                             @forelse ($googleAccounts as $item)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td>{{ $item->employee->employee_name }}</td>
-                                    <td>{{ $item->google_email }}</td>
-                                    <td class="text-center">
-                                        {{ $item->token_expires_at->format('d-m-Y H:i') }}
-                                    </td>
+                                    <td class="text-center">{{ $item->employee->employee_name }}</td>
+                                    <td class="text-center">{{ $item->google_email }}</td>
                                     <td class="text-center">
                                         <form action="{{ route('google-accounts.destroy', $item->id) }}" method="POST"
                                             class="d-inline">
