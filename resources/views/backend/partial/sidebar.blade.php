@@ -31,6 +31,20 @@
             </div>
         </li>
         <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#absen"
+                aria-expanded="true" aria-controls="collapseTable">
+                <i class="fas fa-user-clock"></i>
+                <span>Absensi PPNPN</span>
+            </a>
+            <div id="absen" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Absensi</h6>
+                    <a class="collapse-item" href="{{ route('attendance.index') }}">Halaman Absensi</a>
+                    <a class="collapse-item" href="{{ route('attendances.data') }}">Data Absensi</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('guest_book_index') }}" aria-expanded="true"
                 aria-controls="collapseTable">
                 <i class="fas fa-address-book"></i>

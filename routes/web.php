@@ -14,7 +14,7 @@ use App\Http\Controllers\WorkScheduleController;
 use App\Http\Controllers\ReminderLogController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgencyController;
-
+use App\Http\Controllers\AttendaceController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -125,4 +125,10 @@ Route::middleware('auth', 'ChekRole:superadmin')->group(function () {
     Route::get('/agencies/{agency}/edit', [AgencyController::class, 'edit'])->name('agencies.edit');
     Route::put('/agencies/{agency}', [AgencyController::class, 'update'])->name('agencies.update');
     Route::delete('/agencies/{agency}', [AgencyController::class, 'destroy'])->name('agencies.destroy');
+
+    //absensi PPNPN
+    Route::get('/attendance', [AttendaceController::class, 'index'])->name('attendance.index');
+    Route::post('/attendance/store', [AttendaceController::class, 'store'])->name('attendance.store');
+    Route::get('/attendances-data', [AttendaceController::class, 'dataindex'])->name('attendances.data');
+    Route::delete('/attendances/{attendance}', [AttendaceController::class, 'destroy'])->name('attendances.destroy');
 });
