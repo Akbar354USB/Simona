@@ -46,13 +46,15 @@
                         </span>
                         <hr>
                         <div class="mt-4">
+                            @if (Auth::user()->role == 'superadmin')
+                                <!-- Alert Dashboard -->
+                                <div class="alert alert-info text-center" role="alert">
+                                    <i class="fas fa-info-circle"></i>
+                                    Klik tombol <strong>Dashboard</strong> untuk melanjutkan ke halaman utama sistem
+                                    SIMONA59.
+                                </div>
+                            @endif
 
-                            <!-- Alert Dashboard -->
-                            <div class="alert alert-info text-center" role="alert">
-                                <i class="fas fa-info-circle"></i>
-                                Klik tombol <strong>Dashboard</strong> untuk melanjutkan ke halaman utama sistem
-                                SIMONA59.
-                            </div>
 
                             <!-- Alert Logout -->
                             <div class="alert alert-warning text-center" role="alert">
@@ -61,10 +63,12 @@
                                 mendapat kendala dan Reminder tidak masuk ke Google Calendar.
                             </div>
 
-                            <!-- Tombol Aksi -->
-                            <a href="{{ route('home') }}" class="btn btn-primary mr-2">
-                                <i class="fas fa-tachometer-alt"></i> Dashboard
-                            </a>
+                            @if (Auth::user()->role == 'superadmin')
+                                <!-- Tombol Aksi -->
+                                <a href="{{ route('home') }}" class="btn btn-primary mr-2">
+                                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                                </a>
+                            @endif
 
                             <a href="#" class="btn btn-danger"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
