@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\GoogleAccount;
 use App\Models\GuestBook;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
@@ -37,5 +38,10 @@ class HomeController extends Controller
             'sub_categories.items.item_documents.upload' // perbaiki uploads → upload
         ])->get();
         return view('dashboard',  compact('totalPegawai', 'totalTamu', 'overallProgress', 'googleaccount', 'categories', 'satker'));
+    }
+
+    public function tamu()
+    {
+        return View('tamu');
     }
 }

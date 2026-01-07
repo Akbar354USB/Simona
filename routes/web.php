@@ -40,6 +40,9 @@ Route::get('/google/connect/{employee}', [GoogleController::class, 'redirect'])
 Route::get('/google/callback/', [GoogleController::class, 'callback'])
     ->name('google.callback');
 
+Route::get('/tamu', [HomeController::class, 'tamu'])
+    ->name('redirect.tamu');
+
 Route::middleware(['auth', 'google.connected'])->group(function () {
     // Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

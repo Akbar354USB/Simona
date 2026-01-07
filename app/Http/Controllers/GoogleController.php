@@ -130,7 +130,6 @@ class GoogleController extends Controller
             ]
         );
 
-        return redirect('/employees')
-            ->with('success', 'Google berhasil dihubungkan');
+        return redirect('/tamu');
     }
 }
