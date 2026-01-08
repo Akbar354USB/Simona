@@ -110,15 +110,15 @@ class AttendaceController extends Controller
         );
 
         // ✅ DEBUG LOG (TEMPATKAN DI SINI)
-        // Log::info('DEBUG ABSENSI RADIUS', [
-        //     'employee_id' => $user->employee_id,
-        //     'jarak_meter' => round($distance, 2),
-        //     'radius_kantor' => $office->radius_meter,
-        //     'user_lat' => $request->latitude,
-        //     'user_lng' => $request->longitude,
-        //     'office_lat' => $office->latitude,
-        //     'office_lng' => $office->longitude,
-        // ]);
+        Log::info('DEBUG ABSENSI RADIUS', [
+            'employee_id' => $user->employee_id,
+            'jarak_meter' => round($distance, 2),
+            'radius_kantor' => $office->radius_meter,
+            'user_lat' => $request->latitude,
+            'user_lng' => $request->longitude,
+            'office_lat' => $office->latitude,
+            'office_lng' => $office->longitude,
+        ]);
 
         if ($distance > $office->radius_meter) {
             return response()->json([
@@ -149,11 +149,6 @@ class AttendaceController extends Controller
 
     public function dataindex(Request $request)
     {
-        // $attendances = Attendace::with(['employee', 'workShift'])
-        //     ->latest('attendance_time')
-        //     ->paginate(10);
-
-        // return view('attendance.dataindex', compact('attendances'));
         $query = Attendace::with(['employee', 'workShift'])
             ->latest('attendance_time');
 

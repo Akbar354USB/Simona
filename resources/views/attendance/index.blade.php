@@ -46,6 +46,15 @@
 
 @section('js')
     <script>
+        function showAlert(icon, title, text) {
+            Swal.fire({
+                icon: icon,
+                title: title,
+                text: text,
+                confirmButtonColor: '#4e73df'
+            });
+        }
+
         let latitude = null;
         let longitude = null;
         let stream = null;
@@ -61,14 +70,24 @@
             latitude = pos.coords.latitude;
             longitude = pos.coords.longitude;
         }, err => {
-            alert('GPS tidak aktif');
+            showAlert(
+                'warning',
+                'GPS Tidak Aktif',
+                'Silakan aktifkan GPS untuk melanjutkan absensi'
+            );
+
         });
 
         // 📷 Kamera (realtime only)
         function openCamera() {
 
             if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-                alert('Browser tidak mendukung kamera');
+                showAlert(
+                    'error',
+                    'Tidak Didukung',
+                    'Browser Anda tidak mendukung akses kamera'
+                );
+
                 return;
             }
 
@@ -86,20 +105,35 @@
                 })
                 .catch(err => {
                     console.error(err);
-                    alert('Kamera tidak bisa dibuka. Pastikan izin kamera aktif & HTTPS');
+                    showAlert(
+                        'error',
+                        'Kamera Gagal Dibuka',
+                        'Pastikan izin kamera aktif dan menggunakan HTTPS'
+                    );
+
                 });
         }
 
         function submitAttendance() {
 
             if (!latitude || !longitude) {
-                alert('Lokasi belum terbaca');
+                showAlert(
+                    'warning',
+                    'Lokasi Belum Terbaca',
+                    'Pastikan GPS aktif dan tunggu beberapa detik'
+                );
+
                 return;
             }
 
             let shift = document.getElementById('shift').value;
             if (!shift) {
-                alert('Pilih shift terlebih dahulu');
+                showAlert(
+                    'info',
+                    'Shift Belum Dipilih',
+                    'Silakan pilih shift kerja terlebih dahulu'
+                );
+
                 return;
             }
 
@@ -120,16 +154,49 @@
                 formData.append('type', document.getElementById('type').value);
                 formData.append('_token', '{{ csrf_token() }}');
 
+                Swal.fire({
+                    title: 'Mengirim Absensi...',
+                    text: 'Mohon tunggu sebentar',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
                 fetch("{{ route('attendance.store') }}", {
                         method: 'POST',
                         body: formData
                     })
                     .then(res => res.json())
                     .then(res => {
-                        alert(res.message);
-                        location.reload();
+                        let icon = 'success';
+                        let title = 'Berhasil';
+                        let buttonColor = '#1cc88a';
+
+                        // ❌ Jika di luar radius kantor
+                        if (res.message === 'Di luar radius kantor') {
+                            icon = 'error';
+                            title = 'Gagal Absensi';
+                            buttonColor = '#e74a3b';
+                        }
+
+                        Swal.fire({
+                            icon: icon,
+                            title: title,
+                            text: res.message,
+                            confirmButtonColor: buttonColor
+                        }).then(() => {
+                            // reload hanya jika absensi berhasil
+                            if (icon === 'success') {
+                                location.reload();
+                            }
+                        });
                     })
-                    .catch(err => alert('Gagal absensi'));
+                    .catch(err => showAlert(
+                        'error',
+                        'Gagal',
+                        'Terjadi kesalahan saat mengirim absensi'
+                    ));
             });
         }
     </script>
