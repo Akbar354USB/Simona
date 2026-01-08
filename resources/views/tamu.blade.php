@@ -54,6 +54,14 @@
                                     SIMONA59.
                                 </div>
                             @endif
+                            @if (Auth::user()->role == 'ppnpn')
+                                <!-- Alert Dashboard -->
+                                <div class="alert alert-info text-center" role="alert">
+                                    <i class="fas fa-info-circle"></i>
+                                    Klik tombol <strong>Absen PPNPN</strong> untuk melanjutkan ke halaman utama Absensi
+                                    PPNPN SIMONA59.
+                                </div>
+                            @endif
 
 
                             <!-- Alert Logout -->
@@ -67,6 +75,12 @@
                                 <!-- Tombol Aksi -->
                                 <a href="{{ route('home') }}" class="btn btn-primary mr-2">
                                     <i class="fas fa-tachometer-alt"></i> Dashboard
+                                </a>
+                            @endif
+                            @if (Auth::user()->role == 'ppnpn')
+                                <!-- Tombol Aksi -->
+                                <a href="{{ route('attendance.index') }}" class="btn btn-primary mr-2">
+                                    <i class="fas fa-user-clock"></i> Absen PPNPN
                                 </a>
                             @endif
 

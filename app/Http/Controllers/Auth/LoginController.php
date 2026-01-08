@@ -69,6 +69,11 @@ class LoginController extends Controller
             return redirect()->route('home');
         }
 
+        // 🔐 PPNPN
+        if ($user->role === 'ppnpn') {
+            return redirect()->route('attendance.index');
+        }
+
         // 👤 USER BIASA
         return redirect()->route('redirect.tamu');
     }

@@ -51,6 +51,11 @@ Route::middleware(['auth', 'ChekRole:superadmin', 'google.connected'])->group(fu
         ->name('home');
 });
 
+Route::middleware('auth', 'ChekRole:superadmin,ppnpn')->group(function () {
+    Route::get('/attendance', [AttendaceController::class, 'index'])->name('attendance.index');
+    Route::post('/attendance/store', [AttendaceController::class, 'store'])->name('attendance.store');
+});
+
 Route::middleware('auth', 'ChekRole:superadmin')->group(function () {
     // Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
@@ -125,8 +130,6 @@ Route::middleware('auth', 'ChekRole:superadmin')->group(function () {
     Route::delete('/agencies/{agency}', [AgencyController::class, 'destroy'])->name('agencies.destroy');
 
     //absensi PPNPN
-    Route::get('/attendance', [AttendaceController::class, 'index'])->name('attendance.index');
-    Route::post('/attendance/store', [AttendaceController::class, 'store'])->name('attendance.store');
     Route::get('/attendances-data', [AttendaceController::class, 'dataindex'])->name('attendances.data');
     Route::delete('/attendances/{attendance}', [AttendaceController::class, 'destroy'])->name('attendances.destroy');
     Route::delete('/attendances-delete-all', [AttendaceController::class, 'destroyAll'])->name('attendances.destroyAll');

@@ -22,7 +22,9 @@
 <body id="page-top">
     <div id="wrapper">
         <!-- Sidebar -->
-        @include('backend.partial.sidebar')
+        @if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'admin')
+            @include('backend.partial.sidebar')
+        @endif
         <!-- Sidebar -->
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
