@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdditionalLeaveController;
+use App\Http\Controllers\AdditionalLeaveRequestController;
 use App\Http\Controllers\GoogleController;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +18,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\AttendaceController;
 use App\Http\Controllers\WorkShiftController;
+use App\Http\Controllers\WorkUnitController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -141,6 +144,41 @@ Route::middleware('auth', 'ChekRole:superadmin')->group(function () {
     Route::get('/work-shifts/{workShift}/edit', [WorkShiftController::class, 'edit'])->name('work-shifts.edit');
     Route::put('/work-shifts/{workShift}', [WorkShiftController::class, 'update'])->name('work-shifts.update');
     Route::delete('/work-shifts/{workShift}', [WorkShiftController::class, 'destroy'])->name('work-shifts.destroy');
+
+
+
+    /*Additional Leave Request Routes*/
+
+    // 1. Tampilkan semua data
+    Route::get(
+        '/additional-leave-requests',
+        [AdditionalLeaveRequestController::class, 'index']
+    )->name('additional-leave-requests.index');
+    Route::get(
+        '/additional-leave-requests/create',
+        [AdditionalLeaveRequestController::class, 'create']
+    )->name('additional-leave-requests.create');
+    Route::post(
+        '/additional-leave-requests',
+        [AdditionalLeaveRequestController::class, 'store']
+    )->name('additional-leave-requests.store');
+    Route::get('/additional-leave-requests/{additionalLeaveRequest}', [AdditionalLeaveRequestController::class, 'show'])->name('additional-leave-requests.show');
+    Route::get('/additional-leave-requests/{additionalLeaveRequest}/edit', [AdditionalLeaveRequestController::class, 'edit'])->name('additional-leave-requests.edit');
+    Route::put('/additional-leave-requests/{additionalLeaveRequest}', [AdditionalLeaveRequestController::class, 'update'])->name('additional-leave-requests.update');
+    Route::delete('/additional-leave-requests/{additionalLeaveRequest}', [AdditionalLeaveRequestController::class, 'destroy'])->name('additional-leave-requests.destroy');
+
+    /*Additional Leaves Routes*/
+    Route::get('/additional-leaves', [AdditionalLeaveController::class, 'index'])->name('additional-leaves.index');
+    Route::get('/additional-leaves/create', [AdditionalLeaveController::class, 'create'])->name('additional-leaves.create');
+    Route::post('/additional-leaves', [AdditionalLeaveController::class, 'store'])->name('additional-leaves.store');
+    Route::delete('/additional-leaves/{additionalLeave}', [AdditionalLeaveController::class, 'destroy'])->name('additional-leaves.destroy');
+    Route::get('additional-leave-requests/{additionalLeaveRequest}/print', [AdditionalLeaveRequestController::class, 'print'])->name('additional-leave-requests.print');
+
+    //data unit kerja
+    Route::get('/work-units', [WorkUnitController::class, 'index'])->name('work-units.index');
+    Route::get('/work-units/create', [WorkUnitController::class, 'create'])->name('work-units.create');
+    Route::post('/work-units', [WorkUnitController::class, 'store'])->name('work-units.store');
+    Route::delete('/work-units/{id}', [WorkUnitController::class, 'destroy'])->name('work-units.destroy');
 });
 
 

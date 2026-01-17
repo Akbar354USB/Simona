@@ -25,7 +25,8 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Daftar Data</h6>
                     <a class="collapse-item" href="{{ route('employees.index') }}">Data Pegawai</a>
-                    <a class="collapse-item" href="{{ route('agencies.index') }}">Data Satker</a>
+                    <a class="collapse-item" href="{{ route('work-units.index') }}">Data Unit Kerja</a>
+                    <a class="collapse-item" href="{{ route('agencies.index') }}">Data Satker/Instansi</a>
                     <a class="collapse-item" href="{{ route('users.index') }}">Manajemen User</a>
                 </div>
             </div>
@@ -64,6 +65,23 @@
                     <a class="collapse-item" href="{{ route('work-schedules.index') }}">Jadwal Reminder</a>
                     <a class="collapse-item" href="{{ route('google-accounts.index') }}">Akun google terdaftar</a>
                     <a class="collapse-item" href="{{ route('reminder-logs.index') }}">Monitoring Reminder</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsecuti"
+                aria-expanded="true" aria-controls="collapseTable">
+                <i class="fas fa-calendar-check"></i>
+                <span>Cuti Pegawai</span>
+            </a>
+            <div id="collapsecuti" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Cuti Tahunan Tambahan</h6>
+                    <a class="collapse-item" href="{{ route('additional-leave-requests.create') }}">Form Pengajuan
+                        Cuti</a>
+                    <a class="collapse-item" href="{{ route('additional-leave-requests.index') }}">Data Pengajuan
+                        Cuti</a>
+                    <a class="collapse-item" href="{{ route('additional-leaves.index') }}">Kuota Cuti Pegawai</a>
                 </div>
             </div>
         </li>

@@ -49,4 +49,15 @@ class Employee extends Model
     {
         return $this->hasMany(Attendace::class);
     }
+
+
+    public function additionalLeaveRequests()
+    {
+        return $this->hasMany(AdditionalLeaveRequest::class);
+    }
+
+    public function additionalLeaves()
+    {
+        return $this->hasMany(AdditionalLeave::class);
+    }
 }
