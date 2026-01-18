@@ -17,6 +17,7 @@ use App\Http\Controllers\ReminderLogController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\AttendaceController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\WorkShiftController;
 use App\Http\Controllers\WorkUnitController;
 use Illuminate\Support\Facades\Auth;
@@ -32,9 +33,12 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('sukses');
+// Route::get('/', function () {
+//     return view('landing');
+// })->name('sukses');
+
+
+Route::get('/', [LandingController::class, 'landing'])->name('landing');
 
 Route::get('/google/connect/{employee}', [GoogleController::class, 'redirect'])
     ->name('google.connect');

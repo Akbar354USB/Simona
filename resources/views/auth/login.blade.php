@@ -90,8 +90,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="img/logo/logo.png" rel="icon">
-    <title>RuangAdmin - Login</title>
+    <link href="{{ asset('backend/favicon.png') }}" rel="icon">
+    <title>Simona059-Login</title>
     <link href="{{ asset('backend/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/css/ruang-admin.min.css') }}" rel="stylesheet">
@@ -108,8 +108,17 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="login-form">
-                                    <div class="text-center">
+                                    {{-- <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Login</h1>
+                                    </div>
+                                    <div class="text-center mb-2"><img src="{{ asset('backend/simona059 copy.png') }}"
+                                            alt="" width="50%">
+                                    </div> --}}
+                                    <div
+                                        class="d-flex flex-column align-items-center justify-content-center text-center mb-3">
+                                        <h1 class="h4 text-gray-900 mb-1">LOGIN</h1>
+                                        <img src="{{ asset('backend/simona059 copy.png') }}" alt="Logo SIMONA059"
+                                            class="img-fluid mb-2" style="max-width: 200px;">
                                     </div>
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
